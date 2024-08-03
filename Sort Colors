@@ -1,0 +1,29 @@
+STEP1 : WE WILL CREATE 3 VARIABLES START END AND MID AND WE WILL TRAVERSE FROM MID TO END;
+STEP2: IF THE ARR[MID] == 0 THEN SWAP IT WITH ARR[START] AND MAKE START++ AND MID++;
+STEP3: IF THE ARR[MID] == 1 THEN DO NOTHING WE MOVE THE MID++
+STEP3 : IF THE ARR[MID] == 2 THEN SWAP IT WITH ARR[MID] AND MAKE END-- 
+
+
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int n = nums.size();
+        int s = 0;
+        int e = n-1;
+        int mid = 0;
+        while(mid<=e){
+            if(nums[mid] == 0){
+                swap(nums[s],nums[mid]);
+                s++;
+                mid++;
+            }
+            else if(nums[mid] == 1){
+                mid++;
+            }
+            else{
+                swap(nums[mid],nums[e]);
+                e--;
+            }
+        }
+    }
+};
