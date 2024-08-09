@@ -1,0 +1,41 @@
+NOTE : IT'S ALSO KNOWN AS MOORE'S VOTING ALGORITHM WHERE WE SELECT A CANDIDATE FIRST THEN WE SEARCH IT'S APPEARING N/2 TIME
+to find the majority element we have to find the contender who maybe majority for this we make a res=0 var and a count =1var and iterate a loop from 1 to N and we check if  
+arr[res]== arr[i]  then count ++
+else 
+count--
+and if count gone to 0 then we set 
+res = i;
+count =1 ;
+and after finishing the loop we got our contender  
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int  n = nums.size();
+        int res = 0;
+        int count = 1;
+        for(int i = 1; i<n; i++){
+           if(nums[res] == nums[i]){
+            count++;
+           }
+           else{
+            count--;
+           }
+           if(count == 0){
+             res = i;
+             count = 1;
+           }
+        }
+         count = 0;
+        for(int i = 0; i<n; i++){
+            if(nums[i] == nums[res]){
+                count++;
+            }
+            if(count > n/2){
+                return nums[res];
+            }
+        }
+        return -1;
+
+    }
+};
