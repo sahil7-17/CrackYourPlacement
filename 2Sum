@@ -1,0 +1,25 @@
+NOTE : THERE ARE TWO APPROACHES FOR THIS TWO TYPES OF QUESTION CAN BE ASKED FROM 2SUM FIRST TYPE THEY CAN ASKED IF THE TARGET IS EXIST OR NOT YOU HAVE TO WRITTEN BOOLEAN 
+EITHER TRUE OR FALSE 
+2ND TYPE : YOU HAVE TO WRITTEN THE INDEX OF THE TARGET IF IT'S EXIST IF NOT THEN WRITTEN [-1,-1]
+STEP1 : FIRST WE WILL CREATE A MAP WHERE WE STORE OUR ELEMENT AND IT'S INDEX 
+STEP2 : WE WILL CHECK IF TARGET-NUMS[i] IS EXIST IN THE MAP OR NOT IF IT'S EXIST THEN RETURN THE VECTOR 
+STEP3 : IF IT'S NOT EXIST IN THE MAP THEN WE SIMPLY INSERT THE ELEMENT WITH IT'S INDEX INTO THE MAP
+
+
+class Solution {   //SECOND TYPE
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int>ans;
+        unordered_map<int,int>mp;
+        int n = nums.size();
+        for(int i = 0; i<n; i++){
+            int a = nums[i];
+            int moreNeeded = target - a;
+            if(mp.find(moreNeeded) != mp.end()){
+                return {mp[moreNeeded],i};
+            }
+            mp[nums[i]] = i;
+        }
+        return {-1,-1};
+    }
+};
