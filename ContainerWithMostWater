@@ -1,0 +1,27 @@
+sTEP 1: wE WILL USE TWO POINTERS THAT IS I AND J FROM 0 TO N-1 
+STEP2: WE WILL CHECK WHICH CONTAINTER IS MINIMUM FROM I AND J WE WILL TAKE THE MINIMUM VALUE CONTAINER IN OUR HEIGHT THAT IS INT H = MIN(HEIGHT[I],HEIGHT[J])
+STEP3: AFTER DOING WE HAVE TO FIND THE WIDTH FROM I TO J AND WE FIND BY DOINT (J - I)
+STEP4: 
+
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int res = 0;
+        int n = height.size();
+        int i = 0;
+        int j = n-1;
+        while(i < j){
+            int h = min(height[i],height[j]); //FINDING MINIMUM FROM I AND J 
+            int w = j - i;             //FINDING WIDTH FROM J AND I 
+            int  A = h * w; 
+            res = max(res,A);       //UPDATING RES IF WE FOUND MAX 
+            if(height[i] > height[j]){ //WHEN WE DECREASE OUR WIDTH SO WE HAVE TO TAKE THE MAX HEIGHT 
+                j--;
+            }
+            else{
+                i++;
+            }
+        }
+        return res;
+    }
+};
