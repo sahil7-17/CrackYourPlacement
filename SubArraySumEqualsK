@@ -1,0 +1,23 @@
+find how many subarrays are there equal to target
+STEP1: WE WILL USE MAP WE WILL TRAVERSE FROM 0 AND CALCULATE THE SUM IF THE (SUM-K) EXIST IN THE MAP WE WILL ADD IT'S KEY INTO THE ANS 
+STEP2: IF IT'S NOT EXIST THEN WE WILL SIMPLY ADD IT INTO THE MAP
+
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int target) {
+        int n = nums.size();
+        int ans = 0;
+        int sum = 0;
+        unordered_map<int,int>mp;
+         mp[0] = 1;
+        for(int &num : nums){
+            sum += num;
+           int needed = sum-k;
+           if(mp.find(needed) !=  mp.end()){
+             ans += mp[needed];
+           }
+           mp[sum]++;
+        }
+        return ans;
+    }
+};
