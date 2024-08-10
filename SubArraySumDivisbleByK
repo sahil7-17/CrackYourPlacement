@@ -1,0 +1,27 @@
+NOTE: SAME AS EQUALS TO K 
+
+
+
+class Solution {
+public:
+    int subarraysDivByK(vector<int>& nums, int k) {
+         int n = nums.size();
+         unordered_map<int,int>mp;
+         int sum = 0;
+         mp[0] = 1;
+         int res = 0;
+         for(int i = 0; i<n; i++){
+                sum += nums[i];
+                int rem = sum%k;   //FIND  THE REMAINDER 
+                if(rem < 0){      //IF THE REMAINDER IS 0 THEN WE ADD K INTO IT 
+                    rem += k;
+                }
+             if(mp.find(rem) != mp.end()){   //IF THE REMAINDER EXIST INTO THE MAP WE SIMPLY ADD IT INTO THE RESULT WE WILL ADD THE COUNT OF THE REMAINDER
+                res += mp[rem];
+             }
+             mp[rem]++;       //IF IT'S NOT EXIST INTO THE MAP ADD IT INTO THE MAP AND INCREASE THE COUNT 
+         }
+         return res;
+
+    }
+};
