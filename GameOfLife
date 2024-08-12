@@ -1,0 +1,46 @@
+class Solution {
+public:
+    bool isValid(int x, int y, vector<vector<int>>& board) {
+        return (x >= 0 && x < board.size() && y >= 0 && y < board[0].size());
+    }
+
+    void gameOfLife(vector<vector<int>>& board) {
+        int n = board.size();
+        int m = board[0].size(); // Get the number of columns
+        vector<int> dx{0, 0, 1, 1, 1, -1, -1, -1};
+        vector<int> dy{1, -1, 1, -1, 0, 0, 1, -1};
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+
+                int count_Neighbours = 0;
+                for (int k = 0; k < 8; k++) { // Use a different variable `k` so our innner loop won't collide with outer loop 
+                    int curr_x = i + dx[k];
+                    int curr_y = j + dy[k];
+                    if (isValid(curr_x, curr_y, board) &&
+                        abs(board[curr_x][curr_y]) == 1) {
+                        count_Neighbours++;
+                    }
+                }
+
+                if (board[i][j] == 1 &&
+                    (count_Neighbours < 2 || count_Neighbours > 3)) {
+                    board[i][j] = -1; // Mark live cell as dead
+                }
+                if (board[i][j] == 0 && count_Neighbours == 3) {
+                    board[i][j] = 2; // Mark dead cell as live
+                }
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (board[i][j] == -1) {
+                    board[i][j] = 0; // Update dead cell
+                } else if (board[i][j] == 2) {
+                    board[i][j] = 1; // Update live cell
+                }
+            }
+        }
+    }
+};
