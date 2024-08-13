@@ -1,0 +1,35 @@
+APPROACH : First of all we'll create a mapping array that are given in the question that  vector<int> val{1000, 900, 500, 400, 100, 90, 50, 40, 10,9,5, 4,1};
+it's all the are pointing to it's Roman values                                 vector<string>    sym{"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV""I"};
+
+so there are 13 elements only and there corresponding roman  values in the sym vector 
+we'll traverse from 0 to 13 and we first check if the num == 0 if the num is 0 then we return a empty string 
+if not 0 then we'll divide the num with it's minimum value let's take ex of 1994 
+step1 : it's not 0 so we'll not caught in if case then we will do is 1994/1000 because it's less than 1994 so the ans will be = 1
+so we'll  do in a while loop  with time-- and add how many times 1000 can be  come so here 1000 can come only one time so ourstring will be "M
+step2 : after doing this we'll do modulo with current num to val[i] so we  can find that what number still left;  1994 % 1000 = 994
+step 3 : again repeat the same step 1 then is 900<994 Yes 994 / 900 = 1 times -- so now our string will  be "MCM"
+so we'll repeat the same thing until our num become 0 
+
+                          
+
+
+class Solution {
+public:
+    string intToRoman(int num) {
+        vector<int> val{1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        vector<string> sym{"M",  "CM", "D",  "CD", "C",  "XC", "L",
+                           "XL", "X",  "IX", "V",  "IV", "I"};
+        string res="";
+        for(int i = 0; i<13; i++){
+            if(num == 0){
+                break;
+            }
+            int times = num/val[i];
+            while(times--){
+                res += sym[i];
+            }
+            num = num%val[i];
+        }
+        return res;
+    }
+};
