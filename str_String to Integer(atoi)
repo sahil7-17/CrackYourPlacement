@@ -1,0 +1,33 @@
+APPROACH : SO THE APPROACH IS TO CONVERT THE STRING TO INTEGER VALUE THERE ARE SOME CONDITION ARE THERE IN THE QUESTION THAT ARE
+IF(STR == "___123") op : 123   note: underscore are representing space here 
+if(str == "123hello") op: 123 
+if(str == "___-123hello") op: -123
+if(str == "1337c0d3") op : 1337
+if: integer length is greater than INT_MAX then make it INT_MAX 
+if : integer length is less than INT max then make it INT_MIN
+
+class Solution {
+public:
+    int myAtoi(string s) {
+        int i = 0 ,num = 0 , sign = 1; //+ve
+        while(s[i] == ' '){
+            i++;
+        }
+        while(i<s.size() && (s[i] == '+' || s[i] == '-')){   //to find is the sign is + or -
+            if(s[i] =='+'){
+                sign = 1;
+            }
+            else{
+                sign = -1;
+            }
+
+          i++;
+        }
+        while(i < s.size() && isdigit(s[i])){
+            num = num * 10 + (s[i] -'0');      //(s[i] -'0'); that how we create character to there respective integer value like '1' - '0' so ascii value of 1 = 49 and 0 = 48 so 49-48 = 1
+            i++;
+        }
+        return num*sign;
+
+    }
+};
