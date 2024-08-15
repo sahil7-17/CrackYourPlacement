@@ -1,0 +1,61 @@
+APPROACH : THE APPROACH IS WE WILL USE A STACK AND DECLARE THREE VARIABLES CURRNUM , OPERATION AND CURRCHAR THAT WILL REPRESENT OUR CURRENT CHARACTER 
+NOTE : ALWAYS ASSING OPERATION = '+' FIRST 
+STEP 1 : IF CURRCHAR IS NUMBER WE WILL STORE IT INTO NUM CURRCHAR - '0' THAT WILL GIVE US THE CORRESPONDING NUMBER 
+STEP 2 : IF IT'S NOT A NUMBER AND NOT A SPACE OR A LAST ELEMENT THEN WE PERFORM THE OPERATION THAT ARE GIVEN BELOW        
+IF '+' THEN INSERT THE CURRENT NUMBER INTO THE STACK 
+IF '-' THEN INSERT THE CURRENT NUMBER TO NEGATIVE BY -
+IF '*' THEN REMOVE THE TOP OF THE STACK AND MULTIPLY IT WITH CURRENT NUMBER
+IF '/' THEN REMOVE THE TOP OF THE STACK AND DIVID IT WITH CURRENT NUMBER
+  IN LAST ALWAYS UPDATE THE OPERATION  = CURRENTCHAR 
+                        AND   CURRNUM = 0
+
+
+AFTER DOING ALL THIS OPERATIONS OUR RESULT IS IN STACK 
+INT RES = 0;
+JUST   DO (!ST.EMPTY(){
+     RES += ST.TOP();
+     ST.TOP();
+}
+RETURN RES;
+
+
+
+
+class Solution {
+public:
+    int calculate(string s) {
+        stack<int> st;
+        int currNum = 0;
+        char op = '+';
+        for (int i = 0; i < s.length(); i++) {
+            char currChar = s[i];
+            if (isdigit(currChar)) {
+                currNum = (currNum * 10) + (currChar - '0');    
+            }
+            if (!isdigit(currChar) &&
+                !isspace(currChar) || i == s.length() - 1) {
+                if (op == '-') {
+                    st.push(-currNum);
+                } else if (op == '+') {
+                    st.push(currNum);
+                } else if (op == '*') {
+                    int Top = st.top();
+                    st.pop();
+                    st.push(Top * currNum);
+                } else if (op == '/') {
+                    int Top = st.top();
+                    st.pop();
+                    st.push(Top / currNum);
+                }
+                op = currChar;
+                currNum = 0;
+            }
+        }
+        int res = 0;
+        while (!st.empty()) {
+            res += st.top();
+            st.pop();
+        }
+        return res;
+    }
+};
