@@ -4,7 +4,7 @@ if(str == "123hello") op: 123
 if(str == "___-123hello") op: -123
 if(str == "1337c0d3") op : 1337
 if: integer length is greater than INT_MAX then make it INT_MAX 
-if : integer length is less than INT max then make it INT_MIN
+if : integer length is less than INT MIN then make it INT_MIN
 
 class Solution {
 public:
