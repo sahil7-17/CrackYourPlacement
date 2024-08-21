@@ -1,0 +1,44 @@
+Input: s = "babad"
+Output: "bab"   maxLen is 3 
+Explanation: "aba" is also a valid answer.
+
+var : maxLEn - that tell maxlen of the palindromic string 
+startPoint : it tells from where the palindromic string started 
+APPROACH : the approach is very simple we will run two loops i and j and we do naive way to find subarray or substring then for each i and j we check either the string is palindrome or not 
+if it is a palindrome we take it's length by doing j-i+1 like we do in sliding window  and we store the i into startPoint because that point we'll be starting point of palindrome
+
+IN LAST WE DO s.substr(startPoint, maxLen) substr function takes starting point and length then extract the substring from a string 
+
+
+
+
+class Solution {
+public:
+    bool isPalindrome(string& s, int i, int j) {
+        while (i <= j) {
+            if (s[i] != s[j]) {
+                return false;
+            } else {
+                i++;
+                j--;
+            }
+        }
+        return true;
+    }
+    string longestPalindrome(string s) {
+        int n = s.size();
+        int maxLen = INT_MIN;
+        int startPoint = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                if (isPalindrome(s, i, j) == true) {
+                    if (j - i + 1 > maxLen) {
+                        maxLen = j - i + 1;
+                        startPoint = i;
+                    }
+                }
+            }
+        }
+        return s.substr(startPoint, maxLen);
+    }
+};
