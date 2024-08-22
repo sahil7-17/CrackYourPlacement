@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int maximumProduct(vector<int>& nums) {
+        int n = nums.size();
+        sort(nums.begin(),nums.end());
+        int maxi = INT_MIN;
+        int firstCase = nums[n - 1] * nums[n - 2] * nums[n - 3];  //Always be true if our array does not contain negative elements
+        int secondCase= nums[0]*nums[1]*nums[n-1];              // It will be correct if our array contains Negative numbers like {-100.-99, ,3 , 4, 5}; so -100*-99*5 it wll be +Ve
+
+        maxi = max(firstCase,secondCase);      // we check both the cases which one returning maximum answer
+        return maxi;
+    }
+};
