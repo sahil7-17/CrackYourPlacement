@@ -1,0 +1,40 @@
+For example:
+
+A -> 1
+B -> 2
+C -> 3
+...
+Z -> 26
+AA -> 27
+AB -> 28 
+...
+ 
+
+Example 1:
+
+Input: columnNumber = 1
+Output: "A"
+Example 2:
+
+Input: columnNumber = 28
+Output: "AB"
+Example 3:
+
+Input: columnNumber = 701
+Output: "ZY"
+ 
+
+
+class Solution {
+public:
+    string convertToTitle(int columnNumber) {
+        string ans = "";
+        while (columnNumber > 0) {
+            columnNumber--; // Adjust for 1-based indexing
+            char ch = 'A' + columnNumber % 26; // Get the current character
+            ans = ch + ans; // Prepend character to the result   NOTE: here we are prepending not 
+            columnNumber /= 26; // Move to the next digit
+        }
+        return ans;
+    }
+};
