@@ -1,0 +1,29 @@
+Given a string s, check if it can be constructed by taking a substring of it and appending multiple copies of the substring together.
+
+
+Example 1:
+
+Input: s = "abab"
+Output: true
+Explanation: It is the substring "ab" twice.
+
+
+
+class Solution {
+public:
+    bool repeatedSubstringPattern(string s) {
+           int n = s.size();
+           for(int l=n/2; l>=1; l--){
+                string newString ="";
+                string pattern = s.substr(0,l);
+                int times = n/l;
+                while(times--){
+                    newString += pattern;
+                }
+                if(newString == s){
+                    return true;
+                }
+           }
+           return false;
+    }
+};
