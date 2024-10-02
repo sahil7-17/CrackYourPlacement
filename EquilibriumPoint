@@ -1,0 +1,27 @@
+Intution : Equilibrium Point means the index which left side and right side  contains equal sum
+
+
+
+int equilibriumPoint(vector<long long> &arr) {
+        // Your code here
+        
+        int n = arr.size();
+        int leftSum = 0;
+        int rightSum = 0;
+        
+        for(int i = 0; i<n; i++){
+            leftSum += arr[i];
+        
+        }
+        
+        for(int i = 0; i<n; i++){
+            leftSum -= arr[i];
+            
+            if(leftSum == rightSum){
+                return i+1;
+            }
+             rightSum += arr[i];
+        }
+        return -1;
+    }
+};
