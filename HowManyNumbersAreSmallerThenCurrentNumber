@@ -1,0 +1,34 @@
+Input: nums = [8,1,2,2,3]
+Output: [4,0,1,1,3]
+
+Intution : The idea is to create a bucket array and add the frequencies of the nums array element into the bucket array  after that count smaller elements less than
+each element by  doing commutative count means you will add the arr[i-1] into your array i ex arr[i] = arr[i] + arr[i-1] 
+
+class Solution {
+public:
+    vector<int> smallerNumbersThanCurrent(vector<int>& nums) {
+          int n = nums.size();
+
+          vector<int>ans(n);
+          vector<int>buckets(102);
+           
+          for(int &num : nums){  //Adding the frequency into bucket array
+            buckets[num]++;
+          }
+          //Counting smaller numbers then each element
+          for(int i = 1; i<buckets.size(); i++){
+            buckets[i] += buckets[i-1];
+          }
+
+          for(int i = 0; i<ans.size(); i++){
+             if(nums[i] == 0){
+                ans[i] = 0;
+             }
+             else{
+                ans[i] = buckets[nums[i] - 1];
+             }
+          }
+         
+         return ans;
+    }
+};
