@@ -1,0 +1,30 @@
+Input: s = "())"
+Output: 1
+
+Input: s = "((("
+Output: 3
+
+
+
+
+class Solution {
+public:
+    int minAddToMakeValid(string s) {
+        int n = s.length();
+        int count = 0;
+        int count1 = 0;
+
+        for(char &ch : s){
+            if(ch == '('){
+                count++;
+            }
+            else if(ch == ')' && count > 0){
+                count--;
+            }
+            else{
+                count1++;
+            }
+        }
+        return count+count1;
+    }
+};
